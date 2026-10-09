@@ -1,0 +1,91 @@
+{
+  "entities": {
+    "Student": {
+      "title": "Student",
+      "description": "Registered students and administrators in the college system",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "course": { "type": "string" },
+        "role": { "type": "string", "enum": ["student", "admin"] },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["studentId", "name", "email", "course", "role"]
+    },
+    "Event": {
+      "title": "Event",
+      "description": "College workshops, seminars, and academic events",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "eventId": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "venue": { "type": "string" },
+        "maxCapacity": { "type": "number" },
+        "registeredCount": { "type": "number" },
+        "category": { "type": "string" },
+        "createdBy": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["eventId", "name", "description", "date", "time", "venue", "maxCapacity"]
+    },
+    "Registration": {
+      "title": "Registration",
+      "description": "Student event registrations preventing duplicate enrollment",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "registrationId": { "type": "string" },
+        "studentId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "studentEmail": { "type": "string" },
+        "eventId": { "type": "string" },
+        "eventName": { "type": "string" },
+        "registrationDate": { "type": "string" },
+        "status": { "type": "string", "enum": ["confirmed", "cancelled"] },
+        "calendarEventId": { "type": "string" },
+        "calendarStatus": { "type": "string" }
+      },
+      "required": ["registrationId", "studentId", "eventId", "registrationDate", "status"]
+    },
+    "GoogleToken": {
+      "title": "GoogleToken",
+      "description": "Secure server-side storage for Google OAuth tokens",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "accessToken": { "type": "string" },
+        "refreshToken": { "type": "string" },
+        "expiryDate": { "type": "number" },
+        "scope": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["userId", "email"]
+    }
+  },
+  "firestore": {
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Student and faculty/admin profiles"
+    },
+    "/events/{eventId}": {
+      "schema": "Event",
+      "description": "College events, seminars, and workshops"
+    },
+    "/registrations/{registrationId}": {
+      "schema": "Registration",
+      "description": "Event enrollment records"
+    },
+    "/google_tokens/{userId}": {
+      "schema": "GoogleToken",
+      "description": "Secure server-side Google OAuth credentials"
+    }
+  }
+}

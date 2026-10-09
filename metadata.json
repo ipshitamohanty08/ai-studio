@@ -1,0 +1,6 @@
+{
+  "name": "CampusPulse AI Event Management System",
+  "description": "Full-stack college event and workshop management platform with AI Agent automation and Google Calendar integration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
